@@ -7,39 +7,74 @@
  */
 
 import React, { Component } from 'react';
-import {
+import {TextInput,
+  Button,
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 import Header from './src/header';
 import Generator from './src/generator';
-
-
+import NumList from './src/numlist';
+import Input from './src/input';
+import Picker from './src/picker'
 class App extends Component {
   
   state = {
-    appName: 'My First App',
-    random: [36, 999]
+    myTextInput: '',
+    alphabet: ['a','b','c','d']
   }
 
 
-  onAddRandomNum = () => {
-    alert('add random number!!!')
-  }
 
+  onChangeInput = (event)=> {
+    this.setState({
+        myTextInput: event
+    })
+}
+
+  ondAddTextInput =() => {
+    this.setState(prevState=>{
+      return {
+        myTextInput: '',
+        alphabet: [...prevState.alphabet, prevState.myTextInput]
+      }
+    })
+  }
   render() {
     return (
       <View style={styles.mainView}>
-        <Header name={this.state.appName}/>
-        <View>
-         <Text style={styles.mainText}
-             onPress={()=>alert('text Touch event')}>
-               Hello World</Text>
-        </View>
+        <Picker/>
+        <TextInput
+            value={this.state.myTextInput}
+            style={styles.input}
+            onChangeText={this.onChangeInput}
+            multiline={true}
+            maxLength={100}
+            autoCapitalize={'none'}
+            editable={true}
+            />
+          <Button
+            title="Add Text Input"
+            onPress={this.ondAddTextInput}
+          
+          />
+
+          <ScrollView style={{width: '100%'}}>
+            {
+              this.state.alphabet.map((item, idx) => (
+                <Text 
+                style={styles.mainText}
+                key={idx}
+                >
+                  {item}
+                </Text>
+              ))
+            }
+            
+          </ScrollView>
         
- 
-        <Generator add={this.onAddRandomNum}/>
       </View>
     )
   }
@@ -53,7 +88,7 @@ const styles = StyleSheet.create({
     
     paddingTop: 50,
     alignContent: 'center',
-    justifyContent: 'center'
+    //justifyContent: 'center'
   },
   
   mainText: {
@@ -62,7 +97,17 @@ const styles = StyleSheet.create({
     color: 'red',
     padding: 20,
     alignContent: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+    textAlign: 'center',
+    margin: 20,
+    backgroundColor: 'pink'
+  },
+  input: {
+    width: '100%',
+    backgroundColor: '#cecece',
+    marginTop: 20,
+    fontSize: 25,
+    padding: 10
+}
 })
 export default App;
