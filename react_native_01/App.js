@@ -12,13 +12,16 @@ import {TextInput,
   View,
   Text,
   StyleSheet,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native';
 import Header from './src/header';
 import Generator from './src/generator';
 import NumList from './src/numlist';
 import Input from './src/input';
-import Picker from './src/picker'
+import Picker from './src/picker';
+import Steak from './assets/images/steak.jpg'
+import Modal from './src/modal';
 class App extends Component {
   
   state = {
@@ -45,36 +48,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.mainView}>
-        <Picker/>
-        {/* <TextInput
-            value={this.state.myTextInput}
-            style={styles.input}
-            onChangeText={this.onChangeInput}
-            multiline={true}
-            maxLength={100}
-            autoCapitalize={'none'}
-            editable={true}
-            />
-          <Button
-            title="Add Text Input"
-            onPress={this.ondAddTextInput}
-          
-          />
-
-          <ScrollView style={{width: '100%'}}>
-            {
-              this.state.alphabet.map((item, idx) => (
-                <Text 
-                style={styles.mainText}
-                key={idx}
-                >
-                  {item}
-                </Text>
-              ))
-            }
-            
-          </ScrollView>
-         */}
+       <Modal/>
       </View>
     )
   }
@@ -108,6 +82,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 25,
     padding: 10
-}
+  },
+  image: {
+    width: '100%',
+    height: 700
+  }
+
+
 })
 export default App;
